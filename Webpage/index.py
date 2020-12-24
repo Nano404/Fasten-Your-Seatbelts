@@ -19,7 +19,7 @@ print()
 import pymysql
 conn = pymysql.connect(
     db='corendon',
-    user='nino',
+    user='admin',
     passwd='W@chtw00rd123',
     host='localhost',
     port=3306)
