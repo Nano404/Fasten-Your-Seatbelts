@@ -41,7 +41,7 @@ sudo mv 000-default.conf /etc/apache2/sites-available/
 sudo a2ensite 000-default.conf
 ```
 ```bash
-systemctl reload apache2
+sudo systemctl reload apache2
 ```
 # Setting up the AP
 ```bash 
