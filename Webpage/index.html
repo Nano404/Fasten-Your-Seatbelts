@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Corendon</title>
+        <meta name="description" content="Login Pagina">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    
+    <body>
+            <div class="nav-bar">
+                <object class="Logo" type="image/svg+xml" data="img/corendon-logo.svg"></object>
+                <object class="Home" type="image/svg+xml" data="img/home.svg"></object>
+                <object class="Login" type="image/svg+xml" data="img/padlock.svg"></object>
+            </div>
+
+            <div class="content-middle">
+                <img class="left" src="img/CW_Achtergrond-800x1200_LINKS.png">
+                    <div class="form-container">
+                       <form class="form" action="index.py" method="post">
+                            <object class="wifi" type="image/svg+xml" data="img/wifi.svg"></object>
+                            <input type="text" id="fname" name="fname" placeholder="Firstname">
+			    <input type="text" id="sname" name="sname" placeholder="Surname">
+                            <input type="text" id="tnumber" name="tnumber" placeholder="Ticket Number">
+			    <?php 
+			    $IP = $_SERVER['REMOTE_ADDR']; 
+			    ?>
+			    <input type="hidden" id="ip" name="ip" value="<?php echo $IP;?>" />
+                            <input type="submit" placeholder="Submit">
+                        </form>
+                    </div>
+                <img class="right"src="img/CW_Achtergrond-800x1200_LINKS.png">
+            </div>
+    </body>
+</html>

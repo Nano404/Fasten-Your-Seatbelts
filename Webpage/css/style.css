@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "AgencyFB";
+}
+
+@font-face{
+    font-family: "AgencyFB";
+    src: url(../font/AGENCYR.TTF)
+}
+body {
+    height: calc(100vh - 100px);
+    width: 100%;
+}
+
+
+/* Responsive CSS voor Nav-bar*/
+.nav-bar {
+    height: 100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #42CCED;
+}
+.Logo{
+    height: 100%;
+    justify-self: left;
+    padding-left: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.Home{
+    height: 100%;
+    justify-self: center;
+}
+.Login{
+    height: 100%;
+    justify-self: right;
+    padding-right: 5%;
+}
+
+
+/* Responsive CSS voor content inclusief form*/
+
+
+.content-middle{
+    height: calc(100vh - 100px);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    background: white;
+    
+}
+.left{
+    width: 100%;
+    height: 100%;
+}
+.right{
+    width: 100%;
+    transform: scaleX(-1);
+    height: 100%;
+}
+
+
+/* Responsive CSS voor Form*/
+
+
+.form-container{
+    height: calc(100vh - 100px);
+    background: white;
+    text-align: center;
+}
+.form{
+    height: calc(100vh - 50%);
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    background: #42CCED;
+    border-radius: 16px;
+    text-align: center;
+}
+.wifi{
+    height: 50%;
+    width: 100%;
+}
+
+.form input{
+    padding: 10px 10px;
+    margin: 10px;
+    border: 2px solid #707070;
+    font-size: 1.5vw;
+    border-radius: 16px;
+}
