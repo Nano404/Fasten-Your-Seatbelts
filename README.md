@@ -35,7 +35,10 @@ pressing enter when prompted for a password(any password will do)
 sudo a2dismod mpm_event && sudo a2enmod mpm_prefork cgi
 ```
 ```bash 
-sudo mv 000-default.conf /etc/apache2/sites-enabled/
+sudo mv 000-default.conf /etc/apache2/sites-available/
+```
+```bash 
+sudo a2ensite 000-default.conf
 ```
 # Setting up the AP
 ```bash 
