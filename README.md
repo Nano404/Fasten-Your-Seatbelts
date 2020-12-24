@@ -45,7 +45,7 @@ sudo systemctl reload apache2
 ```
 # Setting up the AP
 ```bash 
-sudo systemctl enable hostapd && sudo systemctl unmask hostapd && sudo systemctl stop hostapd && sudo systemctl stop dnsmasq
+sudo systemctl unmask hostapd && sudo systemctl enable hostapd && sudo systemctl stop hostapd && sudo systemctl stop dnsmasq
 ```
 ```bash 
 sudo mv dnsmasq.conf /etc/
