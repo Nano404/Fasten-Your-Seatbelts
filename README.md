@@ -40,6 +40,9 @@ sudo mv 000-default.conf /etc/apache2/sites-available/
 ```bash 
 sudo a2ensite 000-default.conf
 ```
+```bash
+systemctl reload apache2
+```
 # Setting up the AP
 ```bash 
 sudo systemctl enable hostapd && sudo systemctl unmask hostapd && sudo systemctl stop hostapd && sudo systemctl stop dnsmasq
