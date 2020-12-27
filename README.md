@@ -16,7 +16,7 @@ sudo ln -s /usr/bin/python3 /usr/bin/python
 
 # Installing all needed packages 
 ```bash 
-sudo apt install apache2 python3-pip mariadb-server hostapd dnsmasq -y
+sudo apt install apache2 python3-pip mariadb-server hostapd dnsmasq php -y
 ```
 
 # Creating the database
