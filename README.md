@@ -27,7 +27,7 @@ pressing enter when prompted for a password(any password will do)
   ```bash 
   CREATE DATABASE corendon;
   CREATE USER 'admin'@'localhost' IDENTIFIED BY 'W@CHTW00RD123';
-  GRANT ALL PRIVILEGES ON corendon.* to 'naam'@'localhost';
+  GRANT ALL PRIVILEGES ON corendon.* to 'admin'@'localhost';
   FLUSH PRIVILEGES;
 ```
 # Setting up apache2
