@@ -35,7 +35,25 @@ pressing enter when prompted for a password(any password will do)
 sudo a2dismod mpm_event && sudo a2enmod mpm_prefork cgi
 ```
 ```bash 
-sudo mv 000-default.conf /etc/apache2/sites-available/
+sudo nano /etc/apache2/sites-enabled/000-default.conf
+```
+en plak daar volgende in
+```bash
+<VirtualHost *:80>
+        <Directory /var/www/html>
+                Options +ExecCGI
+                DirectoryIndex index.html
+        </Directory>
+        #allows for CGI to run
+        AddHandler cgi-script .py
+        #allows for PHP to run inside HTML
+        AddHandler application/x-httpd-php .php .html
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 ```
 ```bash 
 sudo a2ensite 000-default.conf
