@@ -14,9 +14,9 @@ sudo rm /user/bin/python
 sudo ln -s /usr/bin/python3 /usr/bin/python
 ```
 
-# Installing all needed packages 
+# Installing Webserver Packages
 ```bash 
-sudo apt install apache2 python3-pip mariadb-server hostapd dnsmasq php -y
+sudo apt install apache2 python3-pip mariadb-server php -y
 ```
 
 # Creating the database
@@ -62,11 +62,28 @@ sudo a2ensite 000-default.conf
 sudo systemctl reload apache2
 ```
 # Setting up the AP
-```bash 
-sudo systemctl unmask hostapd && sudo systemctl enable hostapd && sudo systemctl stop hostapd && sudo systemctl stop dnsmasq
+```bash
+sudo apt install hostapd dnsmasq -y
 ```
+# Setting up the AP
 ```bash 
-sudo mv dnsmasq.conf /etc/
-sudo mv hostapd.conf /etc/hostapd/
-sudo mv dhcpcd.conf /etc/
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
 ```
+Add the following at the end of the file
+```bash
+sudo nano /etc/dhcpcd.conf
+```
+```bash
+interface wlan0
+    static ip_address=10.0.0.1/24
+    nohook wpa_supplicant
+```
+```bash
+sudo nano /etc/sysctl.d/routed-ap.conf
+```
+this will add forwarding capabilitaties to the AP
+```bash
+net.ipv4.ip_forward=1
+```
+
