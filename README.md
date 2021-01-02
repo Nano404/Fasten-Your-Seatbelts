@@ -88,8 +88,9 @@ net.ipv4.ip_forward=1
 ```
 close and open an other file
 ```bash
-/etc/dnsmasq.conf
+sudo nano /etc/dnsmasq.conf
 ```
+add this to the file
 ```bash
 interface=wlan0
 dhcp-range=10.0.0.2,10.0.0.250,255.255.255.0,12h
