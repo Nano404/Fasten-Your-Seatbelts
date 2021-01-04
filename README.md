@@ -39,7 +39,8 @@ sudo nano /etc/apache2/sites-enabled/000-default.conf
 ```
 en plak daar volgende in
 ```bash
-<VirtualHost *:80>
+<VirtualHost *:443>
+        ServerName 10.0.0.1
         <Directory /var/www/html>
                 Options +ExecCGI
                 DirectoryIndex index.html
@@ -50,6 +51,9 @@ en plak daar volgende in
         AddHandler application/x-httpd-php .php .html
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
+        SSLEngine on
+        SSLCertificateFile /var/www/certs/wifi.crt
+        SSLCertificateKeyFile /var/www/certs/wifi.key
 
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -100,4 +104,31 @@ server=1.1.1.3
 server=1.1.1.2
 log-queries
 listen-address=127.0.0.1
+```
+```bash
+sudo nano /etc/hostadp/hostapd.conf
+```
+```bash
+interface=wlan0
+ssid=My_AP
+hw_mode=g
+channel=6
+auth_algs=1
+wmm_enabled=0
+```
+# Iptables
+```bash
+sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
+```
+```bash
+sudo iptables -A POSTROUTING -t nat -o eth0 -j MASQUERADE
+sudo iptables -t mangle -N internet
+sudo iptables -t mangle -A PREROUTING -i wlan0 -p tcp -m tcp --dport 80 -j internet
+sudo iptables -t mangle -A PREROUTING -i wlan0 -p tcp -m tcp --dport 443 -j internet
+sudo iptables -t mangle -A internet -j MARK --set-mark 99
+sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp -m mark --mark 99 -m tcp --dport 80 -j DNAT --to-destination 10.0.0.1
+sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp -m mark --mark 99 -m tcp --dport 443 -j DNAT --to-destination 10.0.0.1
+```
+```bash
+sudo netfilter-persistent save
 ```
