@@ -1,11 +1,16 @@
 #!/usr/bin/python
-
-# Turn on debug mode.
+import secrets
 import cgitb
 import cgi
+import datetime
+import pymysql
+import os
+#Debug console only for test purposes else comment out
 cgitb.enable()
 
+#Variables from the form
 form = cgi.FieldStorage()
+mac = form.getvalue("mac")
 ip = form.getvalue("ip")
 tnumber = form.getvalue("tnumber")
 fname = form.getvalue("fname")
@@ -15,22 +20,37 @@ sname = form.getvalue("sname")
 print("Content-Type: text/html")
 print()
 
-# Connect to the database.
-import pymysql
+# Connect to the database
 conn = pymysql.connect(
-    db='corendon',
-    user='admin',
-    passwd='W@chtw00rd123',
+    db=secrets.database,
+    user=secrets.username,
+    passwd=secrets.password,
     host='localhost',
     port=3306)
-
 c = conn.cursor()
 
-# Insert entered form data into database
-insertQuery = """INSERT INTO `corendon`.`Attempt` (`ticketnumber`, `ipAddr`,  `fname`, `lname`)
-                VALUES(%s, %s, %s, %s)"""
-insertVar = (tnumber, ip, fname, sname)
+#Insert entered form data into database
+time = datetime.datetime.now()
+insertQuery = """INSERT INTO `corendon`.`Attempt` (`ticketnumber`, `ipAddress`, `macAddress`, `firstName`, `lastName`, `dateTime`)
+VALUES(%s, %s, %s, %s, %s, %s)"""
+insertVar = (tnumber, mac, ip, fname, sname, time.strftime("%d/%m/%Y %H:%M"))
 c.execute(insertQuery, insertVar)
 
-conn.commit()
 
+#Check if user excists
+checkQuery = """SELECT * FROM `User` WHERE `ticketnumber` = %s AND `firstName` = %s AND `lastName` = %s"""
+checkVar = (tnumber, fname, sname)
+c.execute(checkQuery, checkVar)
+conn.commit() #commits the 2 database queries
+checkUser = c.fetchone()
+
+def iptable(x):
+    import os
+    os.system("sudo iptables -t mangle -I internet 1 -m mac --mac-source {} -j RETURN".format(x))
+
+#if checkUser is equal to None spit out an error
+if checkUser == None:
+    print(secrets.error)
+else:
+    iptable(mac)
+    print(secrets.success)
