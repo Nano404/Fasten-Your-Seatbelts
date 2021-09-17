@@ -68,6 +68,7 @@ sudo systemctl reload apache2
 # Setting up the AP
 ```bash
 sudo apt install hostapd dnsmasq -y
+rfkill unblock wlan
 ```
 ```bash 
 sudo systemctl unmask hostapd
