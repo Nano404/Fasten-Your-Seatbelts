@@ -25,9 +25,9 @@ sudo mysql -u root -p
 ```
 pressing enter when prompted for a password(any password will do)
   ```bash 
-  CREATE DATABASE corendon;
-  CREATE USER 'admin'@'localhost' IDENTIFIED BY 'W@CHTW00RD123';
-  GRANT ALL PRIVILEGES ON corendon.* to 'admin'@'localhost';
+  CREATE DATABASE wordpress;
+  CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'W@CHTW00RD123';
+  GRANT ALL PRIVILEGES ON wordpress.* to 'wordpress'@'localhost';
   FLUSH PRIVILEGES;
 ```
 # Setting up apache2
